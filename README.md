@@ -1,18 +1,18 @@
-# Modality Robustness in Multimodal Sentiment Analysis (MSA)
+# ML-Guided Search Space Pruning for ASIC Technology Mapping
 
-This repository contains the experimental framework for evaluating and improving the robustness of Multimodal Sentiment Analysis models against modality-specific failures and dominant modality bias.
+This repository contains a high-performance C-based implementation of a Machine Learning "Scout" integrated into the UC Berkeley ABC logic synthesis compiler. The system uses a Bilinear Cross-Attention mechanism to optimize the search space during technology mapping.
 
-## Project Scope
-* [cite_start]**Reproduction:** Validated the experimental framework of benchmark research on the CMU-MOSI and CMU-MOSEL datasets[cite: 20, 23].
-* [cite_start]**Diagnostic Pipeline:** Engineered a testing pipeline to introduce controlled modality errors, such as zero-masking and white Gaussian noise, into language representations[cite: 21].
-* **Optimization:** Optimized model training and parameter efficiency by implementing Low-Rank Adaptation (LoRA).
-* [cite_start]**Robustness:** Developed a modality-perturbation robust training loop from scratch to balance missing and noisy data streams during model training[cite: 22].
+## Technical Highlights
+* **Early-Rejection Scout:** Deployed a Bilinear Cross-Attention mechanism directly inside the ABC compiler to predict the structural compatibility of graph cuts before merging.
+* **Quantized Execution:** Model weights are quantized into integers to achieve nanosecond latency, enabling real-time O(1) search space pruning without floating-point overhead.
+* **Feature Engineering:** Utilizes an 8-element structural embedding (Size, Depth, XOR Density, Complexity, etc.) to identify globally superior logic paths.
+* **Efficiency:** Successfully eliminated over 2.28 million redundant structural merges across arithmetic benchmarks with zero logic degradation.
+* **Results:** Achieved matching or improved area/delay metrics while eliminating ~35% of computational exploration.
 
 ## File Structure
-* `apply_lora_optimization.py`: Script to integrate LoRA weights into the multimodal transformer backbone.
-* `robust_training_loop.py`: Implementation of the diagnostic noise pipeline and robust loss balancing.
+* `ai_pruning_scout.c`: Core logic for the quantized attention predictor and the structural guardrail.
 
 ## Credits & Attribution
-* [cite_start]**Benchmark Methodology:** This project is a reproduction of the experimental framework for evaluating modality robustness in MSA[cite: 18, 20].
-* [cite_start]**Datasets:** Performance was validated using the industry-standard **CMU-MOSI** and **CMU-MOSEL** datasets[cite: 23].
-* [cite_start]**My Role:** My contributions focus on the implementation of the diagnostic noise pipeline, the integration of **Low-Rank Adaptation (LoRA)**, and the development of the robust training loop[cite: 21, 22].
+* **Original Framework:** This implementation is designed for integration with the UC Berkeley ABC open-source logic synthesis and verification system.
+* **Research Basis:** The Bilinear Cross-Attention logic and quantization parameters are based on my M.Tech research at IIT Guwahati.
+* **My Role:** I engineered the early-rejection predictor, optimized the weight matrix for C-level execution, and validated the pruning efficacy against EPFL benchmarks.
